@@ -75,7 +75,7 @@ function set_fix_radacct_table5(){
 	sleep 3
 	wget http://180.188.197.212/down/radacct_new.sql.tar.gz
 	tar xzvf radacct_new.sql.tar.gz
-	mysql -uradius -p'p0radius_0p' radius < /tmp/radacct_new.sql
+	mysql -uradius -p'lc3360001' radius < /tmp/radacct_new.sql
 	rm -rf radacct_new.sql.tar.gz
 	rm -rf radacct_new.sql
 	systemctl restart radiusd
@@ -116,7 +116,7 @@ cd /usr/mysys/
 wget http://180.188.197.212/down/dbback.tar.gz
 tar xzvf dbback.tar.gz
 rm -rf dbback.tar.gz
-echo 'mysql -uradius -pp0radius_0p -e "UPDATE radius.radacct SET acctstoptime = acctstarttime + acctsessiontime WHERE ((UNIX_TIMESTAMP(acctstarttime) + acctsessiontime + 240 - UNIX_TIMESTAMP())<0) AND acctstoptime IS NULL;"' >> /usr/mysys/clearsession.sh
+echo 'mysql -uradius -plc3360001 -e "UPDATE radius.radacct SET acctstoptime = acctstarttime + acctsessiontime WHERE ((UNIX_TIMESTAMP(acctstarttime) + acctsessiontime + 240 - UNIX_TIMESTAMP())<0) AND acctstoptime IS NULL;"' >> /usr/mysys/clearsession.sh
 chmod +x /usr/mysys/clearsession.sh
 echo '0-59/10 * * * * /usr/mysys/clearsession.sh' >> /tmp/crontab.back
 echo '0 0 1 * * /usr/mysys/dbback/backup_radius_db.sh' >> /tmp/crontab.back
@@ -132,7 +132,7 @@ echo "==========================================================================
 										 
 				 The following information will be automatically saved to the /root/info.txt file.		
           
-                   mysql root password:0p0o0i0900      
+                   mysql root password:lc3360001      
 
 		          VPN Account management address：http://$public_ip:9090
 		                             Username：administrator Password:radius
