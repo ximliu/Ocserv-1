@@ -1,6 +1,6 @@
 #!/bin/bash
 function set_shell_input1() {
-	sqladmin=0p0o0i0900
+	sqladmin=lc3360001
 	yum install lynx -y
 	public_ip=`lynx --source www.monip.org | sed -nre 's/^.* (([0-9]{1,3}\.){3}[0-9]{1,3}).*$/\1/p'`
 	#Solve the problem of slow ssh access, you can manually restart ssh after installing the script.
@@ -18,7 +18,7 @@ function set_mysql2() {
 	sleep 3
 	mysqladmin -u root password ""${sqladmin}""
 	mysql -uroot -p${sqladmin} -e "create database radius;"
-	mysql -uroot -p${sqladmin} -e "grant all privileges on radius.* to radius@localhost identified by 'p0radius_0p';"
+	mysql -uroot -p${sqladmin} -e "grant all privileges on radius.* to radius@localhost identified by 'lc3360001';"
 	mysql -uradius -p'p0radius_0p' radius < /etc/raddb/mods-config/sql/main/mysql/schema.sql  
 	systemctl restart mariadb
 }
@@ -40,7 +40,7 @@ function set_freeradius3(){
 	sed -i '/port = 3306/s/^#//' /etc/raddb/mods-available/sql
 	sed -i '/login = "radius"/s/^#//' /etc/raddb/mods-available/sql
 	sed -i '/password = "radpass"/s/^#//' /etc/raddb/mods-available/sql
-	sed -i 's/password = "radpass"/password = "p0radius_0p"/g' /etc/raddb/mods-available/sql	
+	sed -i 's/password = "radpass"/password = "lc3360001"/g' /etc/raddb/mods-available/sql	
 	systemctl restart radiusd
 	sleep 3
 }
