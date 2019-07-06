@@ -149,7 +149,7 @@ echo "==========================================================================
           
                    mysql root用户密码:lc3360001      
 
-		          VPN 账号管理后台地址：http://$public_ip:9090
+		          VPN 账号管理后台地址：http://$public_ip:3361
 		                             账号：administrator 密码:radius
 		                             
 		           如果采用radius认证，需要注释/etc/ocserv/ocserv.conf文件中的下面行密码认证行
