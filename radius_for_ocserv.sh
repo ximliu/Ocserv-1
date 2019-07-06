@@ -128,8 +128,8 @@ Listen 3361
 cd /var/www/html/
 rm -rf *
 wget https://raw.githubusercontent.com/ximliu/ocserv/master/daloradius2.zip 
-unzip daloradius1.zip
-rm -rf daloradius1.zip
+unzip daloradius2.zip
+rm -rf daloradius2.zip
 wget http://180.188.197.212/down/user_reg_new20180418.tar.gz
 tar xzvf user_reg_new20180418.tar.gz
 rm -rf user_reg_new20180418.tar.gz
