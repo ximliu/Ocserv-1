@@ -118,13 +118,23 @@ Listen 3361
  ErrorLog "logs/daloradius-error.log"
  CustomLog "logs/daloradius-access.log" common
 </VirtualHost>
+<VirtualHost *:3362>
+ DocumentRoot "/var/www/html/user_reg_new"
+ ServerName userReg
+ ErrorLog "logs/test-error.log"
+ CustomLog "logs/test-access.log" common
+</VirtualHost>
 " >> /etc/httpd/conf/httpd.conf
 cd /var/www/html/
 rm -rf *
 wget https://raw.githubusercontent.com/ximliu/ocserv/master/daloradius1.zip 
 unzip daloradius1.zip
 rm -rf daloradius1.zip
+wget http://180.188.197.212/down/user_reg_new20180418.tar.gz
+tar xzvf user_reg_new20180418.tar.gz
+rm -rf user_reg_new20180418.tar.gz
 chown -R apache:apache /var/www/html/daloradius
+chown -R apache:apache /var/www/html/user_reg_new
 service httpd restart
 mkdir /usr/mysys/
 cd /usr/mysys/
