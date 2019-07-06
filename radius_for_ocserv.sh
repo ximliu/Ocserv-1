@@ -111,8 +111,8 @@ iptables -I INPUT -p tcp --dport 80 -j ACCEPT
 
 function set_web_config7(){
 echo  "
-Listen 80
-<VirtualHost *:80>
+Listen 9090
+<VirtualHost *:9090>
  DocumentRoot "/var/www/html/daloradius"
  ServerName daloradius
  ErrorLog "logs/daloradius-error.log"
@@ -136,7 +136,6 @@ chmod +x /usr/mysys/clearsession.sh
 echo '0-59/10 * * * * /usr/mysys/clearsession.sh' >> /tmp/crontab.back
 echo '0 0 1 * * /usr/mysys/dbback/backup_radius_db.sh' >> /tmp/crontab.back
 crontab /tmp/crontab.back
-sed -i "s/\['CONFIG_DB_PASS'\] = ''/\['CONFIG_DB_PASS'\] = 'lc0228\!@#'/g" /var/www/html/daloradius/library/daloradius.conf.php
 systemctl restart crond
 }
 
@@ -150,7 +149,7 @@ echo "==========================================================================
           
                    mysql root用户密码:lc3360001      
 
-		          VPN 账号管理后台地址：http://$public_ip:80
+		          VPN 账号管理后台地址：http://$public_ip:9090
 		                             账号：administrator 密码:radius
 		                             
 		           如果采用radius认证，需要注释/etc/ocserv/ocserv.conf文件中的下面行密码认证行
