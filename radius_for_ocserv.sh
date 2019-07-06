@@ -67,8 +67,8 @@ function set_daloradius4(){
 	chown -R apache:apache /var/www/html/daloradius/
 	chmod 664 /var/www/html/daloradius/library/daloradius.conf.php
 	cd /var/www/html/daloradius/
-	mysql -uradius -p'p0radius_0p' radius < contrib/db/fr2-mysql-daloradius-and-freeradius.sql
-	mysql -uradius -p'p0radius_0p' radius < contrib/db/mysql-daloradius.sql
+	mysql -uradius -p'lc0228\!@#' radius < contrib/db/fr2-mysql-daloradius-and-freeradius.sql
+	mysql -uradius -p'lc0228\!@#' radius < contrib/db/mysql-daloradius.sql
 	sleep 3
 	sed -i "s/\['CONFIG_DB_USER'\] = 'root'/\['CONFIG_DB_USER'\] = 'radius'/g"  /var/www/html/daloradius/library/daloradius.conf.php
 	sed -i "s/\['CONFIG_DB_PASS'\] = ''/\['CONFIG_DB_PASS'\] = 'lc0228\!@#'/g" /var/www/html/daloradius/library/daloradius.conf.php
