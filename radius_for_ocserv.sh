@@ -101,18 +101,18 @@ cat >>  /etc/rc.local <<EOF
 systemctl start mariadb
 systemctl start httpd
 systemctl start radiusd
-iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+iptables -I INPUT -p tcp --dport 9090 -j ACCEPT
 EOF
 systemctl start mariadb
 systemctl start httpd
 systemctl start radiusd
-iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+iptables -I INPUT -p tcp --dport 9090 -j ACCEPT
 }
 
 function set_web_config7(){
 echo  "
-Listen 80
-<VirtualHost *:80>
+Listen 9090
+<VirtualHost *:9090>
  DocumentRoot "/var/www/html/daloradius"
  ServerName daloradius
  ErrorLog "logs/daloradius-error.log"
@@ -149,7 +149,7 @@ echo "==========================================================================
           
                    mysql root用户密码:lc3360001      
 
-		          VPN 账号管理后台地址：http://$public_ip:80
+		          VPN 账号管理后台地址：http://$public_ip:9090
 		                             账号：administrator 密码:radius
 		                             
 		           如果采用radius认证，需要注释/etc/ocserv/ocserv.conf文件中的下面行密码认证行
