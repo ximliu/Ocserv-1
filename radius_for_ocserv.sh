@@ -121,9 +121,9 @@ Listen 3361
 " >> /etc/httpd/conf/httpd.conf
 cd /var/www/html/
 rm -rf *
-wget https://raw.githubusercontent.com/ximliu/ocserv/master/daloradius3.zip 
-unzip daloradius3.zip
-rm -rf daloradius3.zip
+wget https://raw.githubusercontent.com/ximliu/ocserv/master/daloradius4.zip 
+unzip daloradius4.zip
+rm -rf daloradius4.zip
 chown -R apache:apache /var/www/html/daloradius
 service httpd restart
 mkdir /usr/mysys/
