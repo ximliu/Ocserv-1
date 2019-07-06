@@ -90,7 +90,7 @@ function set_fix_radacct_table5(){
 	sleep 3
 	wget http://180.188.197.212/down/radacct_new.sql.tar.gz
 	tar xzvf radacct_new.sql.tar.gz
-	mysql -uradius -p'lc0228\!@#' radius < /tmp/radacct_new.sql
+	mysql -uradius -p'lc0228!@#' radius < /tmp/radacct_new.sql
 	rm -rf radacct_new.sql.tar.gz
 	rm -rf radacct_new.sql
 	systemctl restart radiusd
@@ -101,18 +101,18 @@ cat >>  /etc/rc.local <<EOF
 systemctl start mariadb
 systemctl start httpd
 systemctl start radiusd
-iptables -I INPUT -p tcp --dport 9090 -j ACCEPT
+iptables -I INPUT -p tcp --dport 80 -j ACCEPT
 EOF
 systemctl start mariadb
 systemctl start httpd
 systemctl start radiusd
-iptables -I INPUT -p tcp --dport 9090 -j ACCEPT
+iptables -I INPUT -p tcp --dport 80 -j ACCEPT
 }
 
 function set_web_config7(){
 echo  "
-Listen 9090
-<VirtualHost *:9090>
+Listen 80
+<VirtualHost *:80>
  DocumentRoot "/var/www/html/daloradius"
  ServerName daloradius
  ErrorLog "logs/daloradius-error.log"
