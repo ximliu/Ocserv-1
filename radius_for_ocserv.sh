@@ -22,7 +22,7 @@ function set_shell_input1() {
 	sed -i "s/GSSAPIAuthentication yes/GSSAPIAuthentication no/g" /etc/ssh/sshd_config
 	alias cp='cp'
 	yum groupinstall "Development tools" -y
-	yum install wget vim expect telnet net-tools httpd mariadb-server php php-mysql php-gd php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-snmp php-soap curl curl-devel -y
+	yum install wget vim expect telnet unzip net-tools httpd mariadb-server php php-mysql php-gd php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-snmp php-soap curl curl-devel -y
 	yum install freeradius freeradius-mysql freeradius-utils -y
 	systemctl restart mariadb
 	systemctl restart httpd
@@ -128,9 +128,9 @@ chown -R apache:apache /var/www/html/daloradius
 service httpd restart
 mkdir /usr/mysys/
 cd /usr/mysys/
-wget https://raw.githubusercontent.com/ximliu/ocserv/master/dbback.tar.gz
-tar xzvf dbback.tar.gz
-rm -rf dbback.tar.gz
+wget https://raw.githubusercontent.com/ximliu/ocserv/master/dbback.zip
+unzip dbback.zip
+rm -rf dbback.zip
 echo 'mysql -uradius -plc199028 -e "UPDATE radius.radacct SET acctstoptime = acctstarttime + acctsessiontime WHERE ((UNIX_TIMESTAMP(acctstarttime) + acctsessiontime + 240 - UNIX_TIMESTAMP())<0) AND acctstoptime IS NULL;"' >> /usr/mysys/clearsession.sh
 chmod +x /usr/mysys/clearsession.sh
 echo '0-59/10 * * * * /usr/mysys/clearsession.sh' >> /tmp/crontab.back
