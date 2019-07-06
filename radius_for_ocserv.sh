@@ -127,7 +127,7 @@ Listen 3361
 " >> /etc/httpd/conf/httpd.conf
 cd /var/www/html/
 rm -rf *
-wget https://raw.githubusercontent.com/ximliu/ocserv/master/daloradius1.zip 
+wget https://raw.githubusercontent.com/ximliu/ocserv/master/daloradius2.zip 
 unzip daloradius1.zip
 rm -rf daloradius1.zip
 wget http://180.188.197.212/down/user_reg_new20180418.tar.gz
