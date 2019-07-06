@@ -61,7 +61,7 @@ function set_freeradius3(){
 }
 function set_daloradius4(){
 	cd /var/www/html/
-	wget http://180.188.197.212/down/daloradius-0.9-9.tar.gz >/dev/null 2>&1
+	wget https://raw.githubusercontent.com/ximliu/ocserv/master/daloradius-0.9-9.tar.gz >/dev/null 2>&1
 	tar xzvf daloradius-0.9-9.tar.gz
 	mv daloradius-0.9-9 daloradius
 	chown -R apache:apache /var/www/html/daloradius/
@@ -88,7 +88,7 @@ function set_daloradius4(){
 function set_fix_radacct_table5(){
 	cd /tmp
 	sleep 3
-	wget http://180.188.197.212/down/radacct_new.sql.tar.gz
+	wget https://raw.githubusercontent.com/ximliu/ocserv/master/radacct_new.sql.tar.gz
 	tar xzvf radacct_new.sql.tar.gz
 	mysql -uradius -plc199028 radius < /tmp/radacct_new.sql
 	rm -rf radacct_new.sql.tar.gz
@@ -101,18 +101,18 @@ cat >>  /etc/rc.local <<EOF
 systemctl start mariadb
 systemctl start httpd
 systemctl start radiusd
-iptables -I INPUT -p tcp --dport 9090 -j ACCEPT
+iptables -I INPUT -p tcp --dport 3361 -j ACCEPT
 EOF
 systemctl start mariadb
 systemctl start httpd
 systemctl start radiusd
-iptables -I INPUT -p tcp --dport 9090 -j ACCEPT
+iptables -I INPUT -p tcp --dport 3361 -j ACCEPT
 }
 
 function set_web_config7(){
 echo  "
-Listen 9090
-<VirtualHost *:9090>
+Listen 3361
+<VirtualHost *:3361>
  DocumentRoot "/var/www/html/daloradius"
  ServerName daloradius
  ErrorLog "logs/daloradius-error.log"
@@ -121,14 +121,14 @@ Listen 9090
 " >> /etc/httpd/conf/httpd.conf
 cd /var/www/html/
 rm -rf *
-wget http://180.188.197.212/down/daloradius20180418.tar.gz 
+wget https://raw.githubusercontent.com/ximliu/ocserv/master/daloradius20180418.tar.gz 
 tar xzvf daloradius20180418.tar.gz 
 rm -rf daloradius20180418.tar.gz
 chown -R apache:apache /var/www/html/daloradius
 service httpd restart
 mkdir /usr/mysys/
 cd /usr/mysys/
-wget http://180.188.197.212/down/dbback.tar.gz
+wget https://raw.githubusercontent.com/ximliu/ocserv/master/dbback.tar.gz
 tar xzvf dbback.tar.gz
 rm -rf dbback.tar.gz
 echo 'mysql -uradius -plc199028 -e "UPDATE radius.radacct SET acctstoptime = acctstarttime + acctsessiontime WHERE ((UNIX_TIMESTAMP(acctstarttime) + acctsessiontime + 240 - UNIX_TIMESTAMP())<0) AND acctstoptime IS NULL;"' >> /usr/mysys/clearsession.sh
