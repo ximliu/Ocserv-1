@@ -34,7 +34,7 @@ function set_mysql2() {
 	mysqladmin -u root password ""${sqladmin}""
 	mysql -uroot -p${sqladmin} -e "create database radius;"
 	mysql -uroot -p${sqladmin} -e "grant all privileges on radius.* to radius@localhost identified by 'lc0228\!@#';"
-	mysql -uradius -plc0228\!@# radius < /etc/raddb/mods-config/sql/main/mysql/schema.sql  
+	mysql -uradius -p'lc0228\!@#' radius < /etc/raddb/mods-config/sql/main/mysql/schema.sql  
 	systemctl restart mariadb
 }
 
@@ -90,7 +90,7 @@ function set_fix_radacct_table5(){
 	sleep 3
 	wget http://180.188.197.212/down/radacct_new.sql.tar.gz
 	tar xzvf radacct_new.sql.tar.gz
-	mysql -uradius -plc0228\!@# radius < /tmp/radacct_new.sql
+	mysql -uradius -p'lc0228\!@#' radius < /tmp/radacct_new.sql
 	rm -rf radacct_new.sql.tar.gz
 	rm -rf radacct_new.sql
 	systemctl restart radiusd
