@@ -136,6 +136,7 @@ chmod +x /usr/mysys/clearsession.sh
 echo '0-59/10 * * * * /usr/mysys/clearsession.sh' >> /tmp/crontab.back
 echo '0 0 1 * * /usr/mysys/dbback/backup_radius_db.sh' >> /tmp/crontab.back
 crontab /tmp/crontab.back
+sed -i "s/\['CONFIG_DB_PASS'\] = ''/\['CONFIG_DB_PASS'\] = 'lc0228\!@#'/g" /var/www/html/daloradius/library/daloradius.conf.php
 systemctl restart crond
 }
 
