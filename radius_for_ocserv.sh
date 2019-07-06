@@ -102,11 +102,13 @@ systemctl start mariadb
 systemctl start httpd
 systemctl start radiusd
 iptables -I INPUT -p tcp --dport 3361 -j ACCEPT
+iptables -I INPUT -p tcp --dport 3362 -j ACCEPT
 EOF
 systemctl start mariadb
 systemctl start httpd
 systemctl start radiusd
 iptables -I INPUT -p tcp --dport 3361 -j ACCEPT
+iptables -I INPUT -p tcp --dport 3362 -j ACCEPT
 }
 
 function set_web_config7(){
@@ -158,7 +160,7 @@ echo "==========================================================================
 				  以下信息将自动保存到/root/info.txt文件中			
           
                    mysql root用户密码:lc3360001      
-                          用户注册后台登录地址:http://$newPubIP:3362
+                          用户注册后台登录地址:http://$public_ip:3362
 		          VPN 账号管理后台地址：http://$public_ip:3361
 		                             账号：administrator 密码:radius
 		                             
