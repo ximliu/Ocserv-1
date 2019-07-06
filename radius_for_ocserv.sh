@@ -33,8 +33,8 @@ function set_mysql2() {
 	sleep 3
 	mysqladmin -u root password ""${sqladmin}""
 	mysql -uroot -p${sqladmin} -e "create database radius;"
-	mysql -uroot -p${sqladmin} -e "grant all privileges on radius.* to radius@localhost identified by 'lc0228!@#';"
-	mysql -uradius -p'lc0228!@#' radius < /etc/raddb/mods-config/sql/main/mysql/schema.sql  
+	mysql -uroot -p${sqladmin} -e "grant all privileges on radius.* to radius@localhost identified by 'lc199028';"
+	mysql -uradius -plc199028 radius < /etc/raddb/mods-config/sql/main/mysql/schema.sql  
 	systemctl restart mariadb
 }
 
@@ -55,7 +55,7 @@ function set_freeradius3(){
 	sed -i '/port = 3306/s/^#//' /etc/raddb/mods-available/sql
 	sed -i '/login = "radius"/s/^#//' /etc/raddb/mods-available/sql
 	sed -i '/password = "radpass"/s/^#//' /etc/raddb/mods-available/sql
-	sed -i 's/password = "radpass"/password = "lc0228!@#"/g' /etc/raddb/mods-available/sql	
+	sed -i 's/password = "radpass"/password = "lc199028"/g' /etc/raddb/mods-available/sql	
 	systemctl restart radiusd
 	sleep 3
 }
@@ -67,11 +67,11 @@ function set_daloradius4(){
 	chown -R apache:apache /var/www/html/daloradius/
 	chmod 664 /var/www/html/daloradius/library/daloradius.conf.php
 	cd /var/www/html/daloradius/
-	mysql -uradius -p'lc0228\!@#' radius < contrib/db/fr2-mysql-daloradius-and-freeradius.sql
-	mysql -uradius -p'lc0228\!@#' radius < contrib/db/mysql-daloradius.sql
+	mysql -uradius -plc199028 radius < contrib/db/fr2-mysql-daloradius-and-freeradius.sql
+	mysql -uradius -plc199028 radius < contrib/db/mysql-daloradius.sql
 	sleep 3
 	sed -i "s/\['CONFIG_DB_USER'\] = 'root'/\['CONFIG_DB_USER'\] = 'radius'/g"  /var/www/html/daloradius/library/daloradius.conf.php
-	sed -i "s/\['CONFIG_DB_PASS'\] = ''/\['CONFIG_DB_PASS'\] = 'lc0228!@#'/g" /var/www/html/daloradius/library/daloradius.conf.php
+	sed -i "s/\['CONFIG_DB_PASS'\] = ''/\['CONFIG_DB_PASS'\] = 'lc199028'/g" /var/www/html/daloradius/library/daloradius.conf.php
 	yum -y install epel-release
 	yum -y install php-pear-DB
 	systemctl restart mariadb.service 
@@ -90,7 +90,7 @@ function set_fix_radacct_table5(){
 	sleep 3
 	wget http://180.188.197.212/down/radacct_new.sql.tar.gz
 	tar xzvf radacct_new.sql.tar.gz
-	mysql -uradius -p'lc0228!@#' radius < /tmp/radacct_new.sql
+	mysql -uradius -plc199028 radius < /tmp/radacct_new.sql
 	rm -rf radacct_new.sql.tar.gz
 	rm -rf radacct_new.sql
 	systemctl restart radiusd
@@ -131,7 +131,7 @@ cd /usr/mysys/
 wget http://180.188.197.212/down/dbback.tar.gz
 tar xzvf dbback.tar.gz
 rm -rf dbback.tar.gz
-echo 'mysql -uradius -plc0228!@# -e "UPDATE radius.radacct SET acctstoptime = acctstarttime + acctsessiontime WHERE ((UNIX_TIMESTAMP(acctstarttime) + acctsessiontime + 240 - UNIX_TIMESTAMP())<0) AND acctstoptime IS NULL;"' >> /usr/mysys/clearsession.sh
+echo 'mysql -uradius -plc199028 -e "UPDATE radius.radacct SET acctstoptime = acctstarttime + acctsessiontime WHERE ((UNIX_TIMESTAMP(acctstarttime) + acctsessiontime + 240 - UNIX_TIMESTAMP())<0) AND acctstoptime IS NULL;"' >> /usr/mysys/clearsession.sh
 chmod +x /usr/mysys/clearsession.sh
 echo '0-59/10 * * * * /usr/mysys/clearsession.sh' >> /tmp/crontab.back
 echo '0 0 1 * * /usr/mysys/dbback/backup_radius_db.sh' >> /tmp/crontab.back
@@ -149,7 +149,7 @@ echo "==========================================================================
           
                    mysql root用户密码:lc3360001      
 
-		          VPN 账号管理后台地址：http://$public_ip:9090
+		          VPN 账号管理后台地址：http://$public_ip:80
 		                             账号：administrator 密码:radius
 		                             
 		           如果采用radius认证，需要注释/etc/ocserv/ocserv.conf文件中的下面行密码认证行
