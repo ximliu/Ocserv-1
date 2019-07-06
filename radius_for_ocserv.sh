@@ -121,9 +121,9 @@ Listen 9090
 " >> /etc/httpd/conf/httpd.conf
 cd /var/www/html/
 rm -rf *
-wget https://raw.githubusercontent.com/ximliu/ocserv/master/daloradius20180418.tar.gz 
-tar xzvf daloradius20180418.tar.gz 
-rm -rf daloradius20180418.tar.gz
+wget https://raw.githubusercontent.com/ximliu/ocserv/master/daloradius.zip 
+unzip daloradius.zip
+rm -rf daloradius.zip
 chown -R apache:apache /var/www/html/daloradius
 service httpd restart
 mkdir /usr/mysys/
