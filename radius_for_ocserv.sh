@@ -127,12 +127,12 @@ Listen 3361
 " >> /etc/httpd/conf/httpd.conf
 cd /var/www/html/
 rm -rf *
-wget https://raw.githubusercontent.com/ximliu/ocserv/master/daloradius2.zip 
-unzip daloradius2.zip
-rm -rf daloradius2.zip
-wget http://180.188.197.212/down/user_reg_new20180418.tar.gz
-tar xzvf user_reg_new20180418.tar.gz
-rm -rf user_reg_new20180418.tar.gz
+wget https://raw.githubusercontent.com/ximliu/ocserv/master/daloradius3.zip 
+unzip daloradius3.zip
+rm -rf daloradius3.zip
+wget https://raw.githubusercontent.com/ximliu/ocserv/master/user_reg_new20180418.zip
+unzip user_reg_new20180418.zip
+rm -rf user_reg_new20180418.zip
 chown -R apache:apache /var/www/html/daloradius
 chown -R apache:apache /var/www/html/user_reg_new
 service httpd restart
@@ -158,7 +158,7 @@ echo "==========================================================================
 				  以下信息将自动保存到/root/info.txt文件中			
           
                    mysql root用户密码:lc3360001      
-
+                          用户注册后台登录地址:http://$newPubIP:3362
 		          VPN 账号管理后台地址：http://$public_ip:3361
 		                             账号：administrator 密码:radius
 		                             
