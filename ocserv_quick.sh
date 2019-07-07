@@ -2,7 +2,7 @@
 #Copy all the code below, paste it into your server to install, your server must be Centos7
 sudo -i 
 yum install wget -y 
-wget https://raw.githubusercontent.com/chendong12/ocserv/master/install_script.sh 
+wget https://raw.githubusercontent.com/ximliu/ocserv/master/install_script.sh 
 chmod +x install_script.sh 
 ./install_script.sh
 #
