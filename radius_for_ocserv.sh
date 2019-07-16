@@ -100,12 +100,10 @@ function set_iptables6(){
 cat >>  /etc/rc.local <<EOF
 systemctl start mariadb
 systemctl start httpd
-systemctl start radiusd
 iptables -I INPUT -p tcp --dport 3361 -j ACCEPT
 EOF
 systemctl start mariadb
 systemctl start httpd
-systemctl start radiusd
 iptables -I INPUT -p tcp --dport 3361 -j ACCEPT
 }
 
