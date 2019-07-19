@@ -88,7 +88,7 @@ cat >ca.tmpl <<EOF
 cn = "EZIO Annyconnect CA"
 organization = "EZIO"
 serial = 1
-expiration_days = 3650
+expiration_days = 9999
 ca
 signing_key
 cert_signing_key
@@ -102,7 +102,7 @@ cat >server.tmpl <<EOF
 cn = "EZIO Annyconnect CA"
 organization = "EZIO"
 serial = 2
-expiration_days = 3650
+expiration_days = 9999
 encryption_key
 signing_key
 tls_www_server
