@@ -178,36 +178,6 @@ EOF
 chmod o+r /etc/strongswan/ipsec.secrets
 chmod o+x /etc/strongswan/
 }
-cat >>  /etc/rc.local <<EOF
-systemctl start strongswan
-systemctl start iptables
-iptables -F
-iptables -A INPUT -i lo -j ACCEPT
-iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -A INPUT -p icmp -j ACCEPT
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-iptables -A INPUT -p tcp --dport 3361 -j ACCEPT
-iptables -A INPUT -p tcp --dport 3362 -j ACCEPT
-iptables -A INPUT -p tcp --dport 5000 -j ACCEPT 
-iptables -A INPUT -p tcp --dport 1723 -j ACCEPT
-iptables -A INPUT -p gre -j ACCEPT
-iptables -A INPUT -p udp -m policy --dir in --pol ipsec -m udp --dport 1701 -j ACCEPT
-iptables -A INPUT -p udp -m udp --dport 1701 -j ACCEPT
-iptables -A INPUT -p udp -m udp --dport 500 -j ACCEPT
-iptables -A INPUT -p udp -m udp --dport 4500 -j ACCEPT
-iptables -A INPUT -p udp -m udp --dport 1194 -j ACCEPT
-iptables -A INPUT -p esp -j ACCEPT
-iptables -A INPUT -m policy --dir in --pol ipsec -j ACCEPT
-iptables -A INPUT -j DROP
-iptables -A FORWARD -i ppp+ -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT
-iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -A FORWARD -d 10.0.0.0/24 -j ACCEPT
-iptables -A FORWARD -s 10.0.0.0/24 -j ACCEPT
-iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -o $netcard_name -j MASQUERADE
-iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o $netcard_name -j MASQUERADE
-iptables -t nat -A POSTROUTING -s 10.8.1.0/24 -o $netcard_name -j MASQUERADE
-EOF
-
 echo "==========================================================================
                   Centos7 VPN 安装完成                     
                   strongswan VPN 预共享密钥:$ike_passwd 
