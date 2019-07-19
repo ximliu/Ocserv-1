@@ -207,7 +207,7 @@ iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -o $netcard_name -j MASQUERADE
 iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o $netcard_name -j MASQUERADE
 iptables -t nat -A POSTROUTING -s 10.8.1.0/24 -o $netcard_name -j MASQUERADE
 EOF
-}
+
 echo "==========================================================================
                   Centos7 VPN 安装完成                     
                   strongswan VPN 预共享密钥:$ike_passwd 
