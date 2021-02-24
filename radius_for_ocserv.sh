@@ -61,7 +61,7 @@ function set_freeradius3(){
 }
 function set_daloradius4(){
 	cd /var/www/html/
-	wget https://raw.githubusercontent.com/ximliu/ocserv/master/daloradius-0.9-9.tar.gz >/dev/null 2>&1
+	wget https://raw.githubusercontent.com/ximliu/Ocserv-1/master/daloradius-0.9-9.tar.gz >/dev/null 2>&1
 	tar xzvf daloradius-0.9-9.tar.gz
 	mv daloradius-0.9-9 daloradius
 	chown -R apache:apache /var/www/html/daloradius/
@@ -119,14 +119,14 @@ Listen 3361
 " >> /etc/httpd/conf/httpd.conf
 cd /var/www/html/
 rm -rf *
-wget https://raw.githubusercontent.com/ximliu/ocserv/master/daloradius4.zip 
+wget https://raw.githubusercontent.com/ximliu/Ocserv-1/master/daloradius4.zip 
 unzip daloradius4.zip
 rm -rf daloradius4.zip
 chown -R apache:apache /var/www/html/daloradius
 service httpd restart
 mkdir /usr/mysys/
 cd /usr/mysys/
-wget https://raw.githubusercontent.com/ximliu/ocserv/master/dbback.zip
+wget https://raw.githubusercontent.com/ximliu/Ocserv-1/master/dbback.zip
 unzip dbback.zip
 rm -rf dbback.zip
 echo 'mysql -uradius -plc199028 -e "UPDATE radius.radacct SET acctstoptime = acctstarttime + acctsessiontime WHERE ((UNIX_TIMESTAMP(acctstarttime) + acctsessiontime + 240 - UNIX_TIMESTAMP())<0) AND acctstoptime IS NULL;"' >> /usr/mysys/clearsession.sh
